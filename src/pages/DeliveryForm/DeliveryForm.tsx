@@ -40,20 +40,17 @@ const DeliveryForm = ({ tg }: { tg: WebApp }) => {
 
   useEffect(() => {
     tg.MainButton.text = "Отправить 📨";
-    tg.MainButton.onClick(() => sendData());
-    tg.MainButton.show();
+    tg.MainButton.onClick;
+    tg.MainButton.hide();
+    tg.MainButton.onClick(sendData);
   }, []);
 
   useEffect(() => {
-    tg.MainButton.text = "Отправить 📨";
-    tg.MainButton.onClick(() => {
-      if (isValid) {
-        sendData();
-      } else {
-        alert("Заполните все поля формы!");
-      }
-    });
-    tg.MainButton.show();
+    if (isValid) {
+      tg.MainButton.show();
+    } else {
+      tg.MainButton.hide();
+    }
   }, [isValid]);
 
   const handleReturn = () => {
