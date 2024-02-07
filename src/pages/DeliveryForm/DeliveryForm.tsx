@@ -7,8 +7,9 @@ import { Paper, Typography } from "@mui/material";
 import WestIcon from "@mui/icons-material/West";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
+import { useCartContext } from "../../context/CartContext";
 
-interface FormData {
+interface IFormData {
   fullName: string;
   address: string;
   city: string;
@@ -16,18 +17,21 @@ interface FormData {
 }
 
 const DeliveryForm = ({ tg }: { tg: WebApp }) => {
-  const { control, formState } = useForm<FormData>();
-  const { isValid } = formState;
-  //const { cart } = useCartContext();
+  const { cart } = useCartContext();
   const navigate = useNavigate();
+  const { control, getValues, formState } = useForm<IFormData>({
+    mode: "onTouched",
+    reValidateMode: "onChange",
+    shouldFocusError: true,
+  });
+  const { isValid } = formState;
 
   const sendData = () => {
     const data = {
-      test: "send data",
-      // cart,
-      // deliveryInfo: {
-      //   ...getValues()
-      // }
+      cart,
+      eliveryInfo: {
+        ...getValues(),
+      },
     };
 
     tg.sendData(JSON.stringify(data));
@@ -37,16 +41,23 @@ const DeliveryForm = ({ tg }: { tg: WebApp }) => {
   useEffect(() => {
     tg.MainButton.text = "Отправить 📨";
     tg.MainButton.onClick(() => sendData());
-    tg.MainButton.hide();
+    tg.MainButton.show();
+    tg.MainButton.disable();
   }, []);
 
   useEffect(() => {
-    if (isValid) {
-      tg.MainButton.show();
-    } else {
-      tg.MainButton.hide();
-    }
-  }, [isValid, tg.MainButton]);
+    tg.MainButton.text = "Отправить 📨";
+    tg.MainButton.onClick(() => {
+      if (isValid) {
+        sendData();
+        tg.close();
+      } else {
+        alert("Заполните все поля формы!");
+      }
+    });
+    tg.MainButton.show();
+    tg.MainButton.disable();
+  }, [isValid]);
 
   const handleReturn = () => {
     navigate("/cart");
@@ -54,6 +65,7 @@ const DeliveryForm = ({ tg }: { tg: WebApp }) => {
 
   return (
     <form>
+      <button onClick={() => console.log(getValues())}>show</button>
       <Paper className={styles.return} onClick={handleReturn}>
         <WestIcon fontSize="large" />
         <Typography variant="h5">Корзина</Typography>
@@ -64,6 +76,9 @@ const DeliveryForm = ({ tg }: { tg: WebApp }) => {
           <Controller
             name="fullName"
             control={control}
+            rules={{
+              required: "Поле обязательно для заполнения",
+            }}
             defaultValue=""
             render={({ field }) => (
               <TextField
@@ -71,7 +86,6 @@ const DeliveryForm = ({ tg }: { tg: WebApp }) => {
                 label="ФИО"
                 variant="outlined"
                 fullWidth
-                required
               />
             )}
           />
@@ -80,6 +94,9 @@ const DeliveryForm = ({ tg }: { tg: WebApp }) => {
           <Controller
             name="address"
             control={control}
+            rules={{
+              required: "Поле обязательно для заполнения",
+            }}
             defaultValue=""
             render={({ field }) => (
               <TextField
@@ -87,7 +104,6 @@ const DeliveryForm = ({ tg }: { tg: WebApp }) => {
                 label="Адрес"
                 variant="outlined"
                 fullWidth
-                required
               />
             )}
           />
@@ -96,6 +112,9 @@ const DeliveryForm = ({ tg }: { tg: WebApp }) => {
           <Controller
             name="city"
             control={control}
+            rules={{
+              required: "Поле обязательно для заполнения",
+            }}
             defaultValue=""
             render={({ field }) => (
               <TextField
@@ -103,7 +122,6 @@ const DeliveryForm = ({ tg }: { tg: WebApp }) => {
                 label="Город"
                 variant="outlined"
                 fullWidth
-                required
               />
             )}
           />
@@ -112,6 +130,9 @@ const DeliveryForm = ({ tg }: { tg: WebApp }) => {
           <Controller
             name="postalCode"
             control={control}
+            rules={{
+              required: "Поле обязательно для заполнения",
+            }}
             defaultValue=""
             render={({ field }) => (
               <TextField
@@ -119,7 +140,6 @@ const DeliveryForm = ({ tg }: { tg: WebApp }) => {
                 label="Почтовый индекс"
                 variant="outlined"
                 fullWidth
-                required
               />
             )}
           />
