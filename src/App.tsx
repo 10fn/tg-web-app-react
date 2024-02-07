@@ -4,13 +4,13 @@ import { useTelegram } from "./hooks/useTelegram";
 
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import ProductList from "./components/ProductList/ProductList";
-import Footer from "./components/Footer";
 import { CartProvider } from "./context/CartContext";
 import { Route, Routes } from "react-router-dom";
+import { useCart } from "./hooks/useCart";
 
 function App() {
   const { tg, showMainButton, hideMainButton } = useTelegram();
-  const { cart } = useCart;
+  const { cart } = useCart();
   const mode = tg.colorScheme;
 
   const theme = createTheme({ palette: { mode } });
