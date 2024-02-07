@@ -6,22 +6,28 @@ import { ThemeProvider, createTheme } from "@mui/material/styles";
 import ProductList from "./components/ProductList/ProductList";
 import Footer from "./components/Footer";
 import { CartProvider } from "./context/CartContext";
+import { Route, Routes } from "react-router-dom";
 
 function App() {
-  const { tg } = useTelegram();
+  const { tg, toggleMainButton } = useTelegram();
   const mode = tg.colorScheme;
 
   const theme = createTheme({ palette: { mode } });
 
   useEffect(() => {
     tg.ready();
+    tg.MainButton.setParams({ text: "К оформлению" });
+    toggleMainButton();
   }, [tg]);
 
   return (
     <ThemeProvider theme={theme}>
       <CartProvider>
         <main>
-          <ProductList />
+          <Routes>
+            <Route index element={<ProductList />} />
+            <Route path={"form"} element={<div>заполни форму</div>} />
+          </Routes>
         </main>
         <nav>
           <Footer />
