@@ -1,8 +1,11 @@
-import { useEffect } from "react";
 import "./App.css";
+import { useEffect } from "react";
 import { useTelegram } from "./hooks/useTelegram";
+
+import { ThemeProvider, createTheme } from "@mui/material/styles";
+import ProductList from "./components/ProductList/ProductList";
 import Footer from "./components/Footer";
-import { Box, createTheme, ThemeProvider } from "@mui/material";
+import { CartProvider } from "./context/CartContext";
 
 function App() {
   const { tg } = useTelegram();
@@ -16,10 +19,14 @@ function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <nav>
-        <Box>is nox</Box>
-        <Footer />
-      </nav>
+      <CartProvider>
+        <main>
+          <ProductList />
+        </main>
+        <nav>
+          <Footer />
+        </nav>
+      </CartProvider>
     </ThemeProvider>
   );
 }
