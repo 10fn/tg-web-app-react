@@ -6,7 +6,7 @@ import { ThemeProvider, createTheme } from "@mui/material/styles";
 import ProductList from "./components/ProductList/ProductList";
 import { Route, Routes } from "react-router-dom";
 import Cart from "./components/Cart/Cart";
-import { Button } from "@mui/material";
+
 function App() {
   const { tg } = useTelegram();
 
