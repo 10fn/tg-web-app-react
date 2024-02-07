@@ -1,0 +1,7 @@
+.return {
+  display: flex;
+  gap: 3rem;
+  align-items: center;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}

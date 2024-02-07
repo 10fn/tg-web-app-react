@@ -39,7 +39,6 @@ export default function Cart({ tg }: { tg: WebApp }) {
 
       {itemsCount > 0 ? (
         <>
-          <Typography variant="h5">Редактирование заказа</Typography>
           {cart.map((item) => (
             <CartItem key={item.id} item={item} />
           ))}
