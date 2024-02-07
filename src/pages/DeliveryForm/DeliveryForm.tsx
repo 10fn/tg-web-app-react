@@ -42,7 +42,6 @@ const DeliveryForm = ({ tg }: { tg: WebApp }) => {
     tg.MainButton.text = "Отправить 📨";
     tg.MainButton.onClick(() => sendData());
     tg.MainButton.show();
-    tg.MainButton.disable();
   }, []);
 
   useEffect(() => {
@@ -52,7 +51,6 @@ const DeliveryForm = ({ tg }: { tg: WebApp }) => {
         sendData();
       } else {
         alert("Заполните все поля формы!");
-
       }
     });
     tg.MainButton.show();
