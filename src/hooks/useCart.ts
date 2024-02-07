@@ -8,12 +8,12 @@ export function useCart() {
 	const [price, setPrice] = useState<number>(() => {
 		return cart.reduce((total, item) => total + item.price, 0)
 	})
-
-	const itemsCount = cart.length
+	const [itemsCount, setItemsCount] = useState<number>(0)
 
 	useEffect(() => {
 		const newPrice = cart.reduce((total, item) => total + item.price * item.count, 0)
 		setPrice(newPrice)
+		setItemsCount(cart.length)
         console.log(cart)
 	}, [cart])
 
