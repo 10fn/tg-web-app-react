@@ -50,13 +50,12 @@ const DeliveryForm = ({ tg }: { tg: WebApp }) => {
     tg.MainButton.onClick(() => {
       if (isValid) {
         sendData();
-        tg.close();
       } else {
         alert("Заполните все поля формы!");
+
       }
     });
     tg.MainButton.show();
-    tg.MainButton.disable();
   }, [isValid]);
 
   const handleReturn = () => {
@@ -65,7 +64,6 @@ const DeliveryForm = ({ tg }: { tg: WebApp }) => {
 
   return (
     <form>
-      <button onClick={() => console.log(getValues())}>show</button>
       <Paper className={styles.return} onClick={handleReturn}>
         <WestIcon fontSize="large" />
         <Typography variant="h5">Корзина</Typography>
@@ -81,12 +79,7 @@ const DeliveryForm = ({ tg }: { tg: WebApp }) => {
             }}
             defaultValue=""
             render={({ field }) => (
-              <TextField
-                {...field}
-                label="ФИО"
-                variant="outlined"
-                fullWidth
-              />
+              <TextField {...field} label="ФИО" variant="outlined" fullWidth />
             )}
           />
         </Grid>
