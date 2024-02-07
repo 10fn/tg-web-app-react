@@ -5,11 +5,11 @@ import Product from "./Product/Product";
 import { Box, Skeleton } from "@mui/material";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useCart } from "../../hooks/useCart";
+import { useCartContext } from "../../context/CartContext";
 
 export default function ProductList({ tg }: { tg: WebApp }) {
   const { data: products, isLoading } = useProducts();
-  const { itemsCount } = useCart();
+  const { itemsCount } = useCartContext();
   const navigate = useNavigate();
 
   useEffect(() => {

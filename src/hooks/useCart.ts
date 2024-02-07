@@ -18,16 +18,15 @@ export function useCart() {
 	}, [cart])
 
 	const addToCart = (product: IProduct) => {
-		const newItem: Partial<ICartItem> = {
-            id: product.id,
-            name: product.title,
-            price: product.price,
-            image: product.images[0],
+		const newItem: ICartItem = {
+            id: product!.id,
+            name: product!.title,
+            price: product!.price,
+            image: product!.images[0],
             count: 1
         }
 
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-expect-error
+        
 		setCart([...cart, newItem])
 	}
 
