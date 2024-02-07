@@ -9,13 +9,15 @@ import { Route, Routes } from "react-router-dom";
 function App() {
   const { tg, showMainButton, hideMainButton } = useTelegram();
   const { itemsCount } = useCartContext();
-  const mode = tg.colorScheme;
 
+  const mode = tg.colorScheme;
   const theme = createTheme({ palette: { mode } });
 
   useEffect(() => {
     tg.ready();
-    tg.MainButton.setParams({ text: "К оформлению" });
+    tg.MainButton.textColor = "#7FFF00";
+    tg.MainButton.setParams({ text: "К оформлению", text_color: "#FFFFFF" });
+    tg.MainButton.onClick(() => alert("test"));
   }, [tg]);
 
   useEffect(() => {
