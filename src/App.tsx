@@ -9,7 +9,8 @@ import { CartProvider } from "./context/CartContext";
 import { Route, Routes } from "react-router-dom";
 
 function App() {
-  const { tg, toggleMainButton } = useTelegram();
+  const { tg, showMainButton, hideMainButton } = useTelegram();
+  const { cart } = useCart;
   const mode = tg.colorScheme;
 
   const theme = createTheme({ palette: { mode } });
@@ -17,8 +18,15 @@ function App() {
   useEffect(() => {
     tg.ready();
     tg.MainButton.setParams({ text: "К оформлению" });
-    toggleMainButton();
   }, [tg]);
+
+  useEffect(() => {
+    if (cart.length > 0) {
+      showMainButton();
+    } else {
+      hideMainButton();
+    }
+  }, [cart]);
 
   return (
     <ThemeProvider theme={theme}>
@@ -29,9 +37,6 @@ function App() {
             <Route path={"form"} element={<div>заполни форму</div>} />
           </Routes>
         </main>
-        <nav>
-          <Footer />
-        </nav>
       </CartProvider>
     </ThemeProvider>
   );

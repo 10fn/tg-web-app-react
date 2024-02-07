@@ -1,17 +1,18 @@
 const tg = window.Telegram.WebApp
 export const useTelegram = () => {
 
-    const toggleMainButton = () => {
-        if (tg.MainButton.isVisible) {
-            tg.MainButton.hide()
-        } else {
-            tg.MainButton.show()
-        }
+    const showMainButton = () => {
+        tg.MainButton.show()
+    }
+
+    const hideMainButton = () => {
+        tg.MainButton.hide()
     }
 
     return {
         tg,
         user: tg.initDataUnsafe.user,
-        toggleMainButton
+        showMainButton,
+        hideMainButton
     }
 }
