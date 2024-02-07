@@ -37,6 +37,7 @@ const DeliveryForm = ({ tg }: { tg: WebApp }) => {
   useEffect(() => {
     tg.MainButton.text = "Отправить 📨";
     tg.MainButton.onClick(() => sendData());
+    tg.MainButton.hide();
   }, []);
 
   useEffect(() => {
