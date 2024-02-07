@@ -9,13 +9,13 @@ import Typography from "@mui/material/Typography";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import { IProduct } from "../../../types/Product";
 import { Button } from "@mui/material";
-import { useCart } from "../../../hooks/useCart";
+import { useCartContext } from "../../../context/CartContext";
 
 export default function RecipeReviewCard({ product }: { product: IProduct }) {
   const { id, title, description, images, price } = product;
 
-  const { cart, addToCart, removeFromCart } = useCart();
-  
+  const { cart, addToCart, removeFromCart } = useCartContext();
+
   const truncatedTitle = title.length > 22 ? `${title.slice(0, 22)}...` : title;
 
   const isInCart = cart.some((item) => item.id === id);

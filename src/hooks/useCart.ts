@@ -14,6 +14,7 @@ export function useCart() {
 	useEffect(() => {
 		const newPrice = cart.reduce((total, item) => total + item.price, 0)
 		setPrice(newPrice)
+        console.log(cart)
 	}, [cart])
 
 	const addToCart = (product: IProduct) => {
@@ -25,8 +26,7 @@ export function useCart() {
             count: 1
         }
 
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-expect-error
+       
 		setCart([...cart, newItem])
 	}
 

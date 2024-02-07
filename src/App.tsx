@@ -4,13 +4,11 @@ import { useTelegram } from "./hooks/useTelegram";
 
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import ProductList from "./components/ProductList/ProductList";
-import { CartProvider } from "./context/CartContext";
+import { useCartContext } from "./context/CartContext";
 import { Route, Routes } from "react-router-dom";
-import { useCart } from "./hooks/useCart";
-
 function App() {
   const { tg, showMainButton, hideMainButton } = useTelegram();
-  const { cart, itemsCount } = useCart();
+  const { itemsCount } = useCartContext();
   const mode = tg.colorScheme;
 
   const theme = createTheme({ palette: { mode } });
@@ -21,7 +19,7 @@ function App() {
   }, [tg]);
 
   useEffect(() => {
-    if (cart.length > 0) {
+    if (itemsCount > 0) {
       showMainButton();
     } else {
       hideMainButton();
@@ -30,14 +28,12 @@ function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <CartProvider>
-        <main>
-          <Routes>
-            <Route index element={<ProductList />} />
-            <Route path={"form"} element={<div>заполни форму</div>} />
-          </Routes>
-        </main>
-      </CartProvider>
+      <main>
+        <Routes>
+          <Route index element={<ProductList />} />
+          <Route path={"form"} element={<div>заполни форму</div>} />
+        </Routes>
+      </main>
     </ThemeProvider>
   );
 }
