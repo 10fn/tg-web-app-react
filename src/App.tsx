@@ -21,8 +21,8 @@ function App() {
     <ThemeProvider theme={theme}>
       <main>
         <Routes>
-          <Route index element={<ProductList />} />
-          <Route path={"cart"} element={<Cart />} />
+          <Route index element={<ProductList tg={tg} />} />
+          <Route path={"cart"} element={<Cart tg={tg} />} />
           <Route path={"form"} element={<div>форма</div>} />
         </Routes>
       </main>
