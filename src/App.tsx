@@ -10,7 +10,7 @@ import { useCart } from "./hooks/useCart";
 
 function App() {
   const { tg, showMainButton, hideMainButton } = useTelegram();
-  const { cart } = useCart();
+  const { cart, itemsCount } = useCart();
   const mode = tg.colorScheme;
 
   const theme = createTheme({ palette: { mode } });
@@ -26,7 +26,7 @@ function App() {
     } else {
       hideMainButton();
     }
-  }, [cart]);
+  }, [itemsCount]);
 
   return (
     <ThemeProvider theme={theme}>
