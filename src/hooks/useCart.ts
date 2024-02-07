@@ -12,7 +12,7 @@ export function useCart() {
 	const itemsCount = cart.length
 
 	useEffect(() => {
-		const newPrice = cart.reduce((total, item) => total + item.price, 0)
+		const newPrice = cart.reduce((total, item) => total + item.price * item.count, 0)
 		setPrice(newPrice)
         console.log(cart)
 	}, [cart])

@@ -17,7 +17,7 @@ export default function Cart() {
   }, []);
 
   useEffect(() => {
-    tg.MainButton.text = `К оформлению (${price})`;
+    tg.MainButton.text = `К оформлению 📝(${price}$)`;
   }, [price]);
 
   useEffect(() => {
@@ -28,11 +28,15 @@ export default function Cart() {
     }
   }, [itemsCount]);
 
+  const handleReturn = () => {
+    navigate("/");
+  };
+
   return (
     <Box className={styles.container}>
-      <Paper className={styles.return}>
+      <Paper className={styles.return} onClick={handleReturn}>
         <WestIcon fontSize="large" />
-        <Typography variant="h3">Каталог</Typography>
+        <Typography variant="h5">Каталог</Typography>
       </Paper>
 
       {itemsCount > 0 ? (
