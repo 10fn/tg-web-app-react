@@ -12,7 +12,7 @@ function App() {
   const { tg } = useTelegram();
 
   const mode = tg.colorScheme;
-  const theme = createTheme({ palette: { mode: "dark" } });
+  const theme = createTheme({ palette: { mode } });
 
   useEffect(() => {
     tg.ready();
