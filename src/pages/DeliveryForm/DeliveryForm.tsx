@@ -31,6 +31,7 @@ const DeliveryForm = ({ tg }: { tg: WebApp }) => {
     };
 
     tg.sendData(JSON.stringify(data));
+    tg.close();
   };
 
   useEffect(() => {
@@ -52,7 +53,6 @@ const DeliveryForm = ({ tg }: { tg: WebApp }) => {
 
   return (
     <form>
-      <button onClick={sendData}>Отправить</button>
       <Paper className={styles.return} onClick={handleReturn}>
         <WestIcon fontSize="large" />
         <Typography variant="h5">Корзина</Typography>
