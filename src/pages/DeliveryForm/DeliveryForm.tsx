@@ -29,9 +29,10 @@ const DeliveryForm = ({ tg }: { tg: WebApp }) => {
   const sendData = () => {
     const data = {
       cart,
-      eliveryInfo: {
+      deliveryInfo: {
         ...getValues(),
       },
+      queryId: tg.initDataUnsafe?.query_id,
     };
 
     tg.sendData(JSON.stringify(data));
