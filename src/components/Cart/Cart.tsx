@@ -3,13 +3,11 @@ import { Box, Paper, Typography } from "@mui/material";
 import { useCartContext } from "../../context/CartContext";
 import CartItem from "./CartItem/CartItem";
 import { useEffect } from "react";
-import { useTelegram } from "../../hooks/useTelegram";
 import { useNavigate } from "react-router-dom";
 import WestIcon from "@mui/icons-material/West";
 
-export default function Cart() {
+export default function Cart({ tg }: { tg: WebApp }) {
   const { cart, price, itemsCount } = useCartContext();
-  const { tg } = useTelegram();
   const navigate = useNavigate();
 
   useEffect(() => {
